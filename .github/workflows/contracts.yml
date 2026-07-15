@@ -1,0 +1,29 @@
+name: Contracts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Seismic Foundry
+        run: |
+          curl -L -H "Accept: application/vnd.github.v3.raw" \
+            "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
+          "$HOME/.seismic/bin/sfoundryup"
+      - name: Check formatting
+        working-directory: contracts
+        run: "$HOME/.seismic/bin/sforge" fmt --check
+      - name: Run tests
+        working-directory: contracts
+        run: "$HOME/.seismic/bin/sforge" test -vv
+
