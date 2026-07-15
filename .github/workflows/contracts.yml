@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  SEISMIC_DIR: ${{ runner.temp }}/.seismic
+  SEISMIC_DIR: /tmp/.seismic
 
 jobs:
   test:
