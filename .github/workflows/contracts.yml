@@ -22,8 +22,7 @@ jobs:
           "$HOME/.seismic/bin/sfoundryup"
       - name: Check formatting
         working-directory: contracts
-        run: "$HOME/.seismic/bin/sforge" fmt --check
+        run: $HOME/.seismic/bin/sforge fmt --check
       - name: Run tests
         working-directory: contracts
-        run: "$HOME/.seismic/bin/sforge" test -vv
-
+        run: $HOME/.seismic/bin/sforge test -vv
