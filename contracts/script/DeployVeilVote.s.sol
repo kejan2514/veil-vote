@@ -15,4 +15,3 @@ contract DeployVeilVote is Script {
         vm.stopBroadcast();
     }
 }
-

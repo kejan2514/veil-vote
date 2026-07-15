@@ -72,9 +72,9 @@ contract VeilVote {
 
         hasVoted[msg.sender] = sbool(true);
         if (bool(inFavor)) {
-            votesFor += 1s;
+            votesFor += suint256(1);
         } else {
-            votesAgainst += 1s;
+            votesAgainst += suint256(1);
         }
 
         emit BallotSubmitted(msg.sender);
@@ -94,4 +94,3 @@ contract VeilVote {
         return Outcome.Tied;
     }
 }
-

@@ -103,4 +103,3 @@ contract VeilVoteTest is Test {
         ballot.vote(sbool(true));
     }
 }
-
