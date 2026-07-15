@@ -22,10 +22,14 @@ jobs:
         run: |
           mkdir -p "$SEISMIC_DIR/bin"
           curl -fsSL \
-            "https://raw.githubusercontent.com/SeismicSystems/seismic-foundry/seismic/sfoundryup/sfoundryup" \
-            -o "$SEISMIC_DIR/bin/sfoundryup"
-          chmod +x "$SEISMIC_DIR/bin/sfoundryup"
-          "$SEISMIC_DIR/bin/sfoundryup"
+            "https://github.com/SeismicSystems/seismic-foundry/releases/download/v0.2.0/sfoundry_v0.2.0_linux_amd64.tar.gz" \
+            | tar -xz -C "$SEISMIC_DIR/bin"
+          curl -fsSL \
+            "https://github.com/SeismicSystems/seismic-solidity/releases/download/cd9163d/ssolc-linux-x86_64.tar.gz" \
+            | tar -xz -C "$SEISMIC_DIR"
+          mv "$SEISMIC_DIR/solc/solc" "$SEISMIC_DIR/bin/ssolc"
+          chmod +x "$SEISMIC_DIR/bin/ssolc"
+          echo "$SEISMIC_DIR/bin" >> "$GITHUB_PATH"
       - name: Check formatting
         working-directory: contracts
         run: $SEISMIC_DIR/bin/sforge fmt --check
