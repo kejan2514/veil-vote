@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  SEISMIC_DIR: ${{ runner.temp }}/.seismic
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,10 +22,10 @@ jobs:
         run: |
           curl -L -H "Accept: application/vnd.github.v3.raw" \
             "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
-          "$HOME/.seismic/bin/sfoundryup"
+          "$SEISMIC_DIR/bin/sfoundryup"
       - name: Check formatting
         working-directory: contracts
-        run: $HOME/.seismic/bin/sforge fmt --check
+        run: $SEISMIC_DIR/bin/sforge fmt --check
       - name: Run tests
         working-directory: contracts
-        run: $HOME/.seismic/bin/sforge test -vv
+        run: $SEISMIC_DIR/bin/sforge test -vv
