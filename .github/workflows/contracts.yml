@@ -20,8 +20,11 @@ jobs:
           submodules: recursive
       - name: Install Seismic Foundry
         run: |
-          curl -L -H "Accept: application/vnd.github.v3.raw" \
-            "https://api.github.com/repos/SeismicSystems/seismic-foundry/contents/sfoundryup/install?ref=seismic" | bash
+          mkdir -p "$SEISMIC_DIR/bin"
+          curl -fsSL \
+            "https://raw.githubusercontent.com/SeismicSystems/seismic-foundry/seismic/sfoundryup/sfoundryup" \
+            -o "$SEISMIC_DIR/bin/sfoundryup"
+          chmod +x "$SEISMIC_DIR/bin/sfoundryup"
           "$SEISMIC_DIR/bin/sfoundryup"
       - name: Check formatting
         working-directory: contracts
